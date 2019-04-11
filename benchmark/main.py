@@ -20,11 +20,10 @@ def add_exp(df, time, time_steps, depth, calc_type, hardware, cell):
 
 
 def main(hardware):
-    params = product([10, 100], [100, 500])
+    params = product([10], [100])
+    df_all = pd.DataFrame(columns=['time', 'time_steps', 'depth',
+                                   'calc_type', 'hardware', 'cell'])
     for (depth, time_steps) in params:
-        df_all = pd.DataFrame(columns=['time', 'time_steps', 'depth',
-                                       'calc_type', 'hardware', 'cell'])
-
         # GRUCell
         inference, train = benchmark_dynamic_rnn(tf.nn.rnn_cell.GRUCell(100),
                              batch_size=100,
