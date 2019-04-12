@@ -20,7 +20,7 @@ def add_exp(df, time, time_steps, depth, calc_type, hardware, cell):
 
 
 def main(hardware):
-    params = product([10], [100])
+    params = product([10, 50], [100, 200])
     df_all = pd.DataFrame(columns=['time', 'time_steps', 'depth',
                                    'calc_type', 'hardware', 'cell'])
     for (depth, time_steps) in params:
@@ -34,14 +34,15 @@ def main(hardware):
         df_all = add_exp(df_all, train, time_steps, depth,
                  'train', hardware, 'GRUCell')
 
-        # CudnnGRU
-        inference, train = benchmark_cudnn('gru', batch_size=100,
-                           time_steps=time_steps, depth=depth,
-                           verbose=True)
-        df_all = add_exp(df_all, inference, time_steps, depth,
-                 'inference', hardware, 'CudnnGRU')
-        df_all = add_exp(df_all, train, time_steps, depth,
-                 'train', hardware, 'CudnnGRU')
+        if hardware == 'gpu':
+            # CudnnGRU
+            inference, train = benchmark_cudnn('gru', batch_size=100,
+                               time_steps=time_steps, depth=depth,
+                               verbose=True)
+            df_all = add_exp(df_all, inference, time_steps, depth,
+                     'inference', hardware, 'CudnnGRU')
+            df_all = add_exp(df_all, train, time_steps, depth,
+                     'train', hardware, 'CudnnGRU')
 
         # GRUBlockCell
         inference, train = benchmark_dynamic_rnn(
@@ -87,14 +88,15 @@ def main(hardware):
         df_all = add_exp(df_all, train, time_steps, depth,
                  'train', hardware, 'LSTMBlockFusedCell')
 
-        # CudnnLSTM
-        inference, train = benchmark_cudnn('lstm', batch_size=100,
-                           time_steps=time_steps, depth=depth,
-                           verbose=True)
-        df_all = add_exp(df_all, inference, time_steps, depth,
-                 'inference', hardware, 'CudnnLSTM')
-        df_all = add_exp(df_all, train, time_steps, depth,
-                 'train', hardware, 'CudnnLSTM')
+        if hardware == 'gpu':
+            # CudnnLSTM
+            inference, train = benchmark_cudnn('lstm', batch_size=100,
+                               time_steps=time_steps, depth=depth,
+                               verbose=True)
+            df_all = add_exp(df_all, inference, time_steps, depth,
+                     'inference', hardware, 'CudnnLSTM')
+            df_all = add_exp(df_all, train, time_steps, depth,
+                     'train', hardware, 'CudnnLSTM')
 
     df_all.to_csv(f'{hardware}_profile.csv')
 
