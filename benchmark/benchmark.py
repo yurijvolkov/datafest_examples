@@ -8,6 +8,25 @@ from tqdm import tqdm
 def benchmark_dynamic_rnn(cell, batch_size, time_steps, depth,
                           num_iter=1000, hot_start_after=10,
                           num_units=100, verbose=False):
+    """
+            Benchmarks RNN cells that are compatible with `dynamic_rnn`
+        interface.
+
+        Args:
+            cell (RNNCell): Rnn cell
+            batch_size (int):
+            time_steps (int):
+            depth (int):
+            num_iter (int): Total number of iterations to run.
+            hot_start_after (int): Function starts to benchmark
+                calculations only after `hot_start_after` iterations.
+            num_units (int): Number of units in RNN layer.
+            verbose (bool):
+        Returns: tuple(list, list)
+            First element is benchmarks for inference and second
+            for training with Adam.
+    """
+
     tf.reset_default_graph()
 
     x = tf.placeholder(tf.float32, [None, None, depth], name='input')
@@ -48,6 +67,24 @@ def benchmark_dynamic_rnn(cell, batch_size, time_steps, depth,
 def benchmark_cudnn(cell_name, batch_size, time_steps, depth,
                     num_iter=1000, hot_start_after=10,
                     num_units=100, verbose=False):
+    """
+            Benchmarks RNN cells that use Cudnn interface.
+
+        Args:
+            cell (RNNCell): Rnn cell
+            batch_size (int):
+            time_steps (int):
+            depth (int):
+            num_iter (int): Total number of iterations to run.
+            hot_start_after (int): Function starts to benchmark
+                calculations only after `hot_start_after` iterations.
+            num_units (int): Number of units in RNN layer.
+            verbose (bool):
+        Returns: tuple(list, list)
+            First element is benchmarks for inference and second
+            for training with Adam.
+    """
+
     tf.reset_default_graph()
 
     x = tf.placeholder(tf.float32, [None, None, depth], name='input')
@@ -96,6 +133,24 @@ def benchmark_cudnn(cell_name, batch_size, time_steps, depth,
 def benchmark_fused_rnn(cell, batch_size, time_steps, depth,
                         num_iter=1000, hot_start_after=10,
                         num_units=100, verbose=False):
+    """
+            Benchmarks LSTMBlockFusedCell.
+
+        Args:
+            cell (RNNCell): LSTMBlockFusedCell
+            batch_size (int):
+            time_steps (int):
+            depth (int):
+            num_iter (int): Total number of iterations to run.
+            hot_start_after (int): Function starts to benchmark
+                calculations only after `hot_start_after` iterations.
+            num_units (int): Number of units in RNN layer.
+            verbose (bool):
+        Returns: tuple(list, list)
+            First element is benchmarks for inference and second
+            for training with Adam.
+    """
+
     tf.reset_default_graph()
 
     x = tf.placeholder(tf.float32, [None, None, depth], name='input')
