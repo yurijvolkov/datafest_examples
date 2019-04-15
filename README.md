@@ -2,7 +2,7 @@
 
 ## Experiments setup
 
-All experiments weere done with next setup:
+All experiments were done with next setup:
 * Nvidia GeForce 1050Ti Mobile
 * Intel Core i5 8300H
 * Tensorflow 1.13
