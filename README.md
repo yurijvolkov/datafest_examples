@@ -22,10 +22,10 @@ All experiments were done with next setup:
   After that you can find `cpu_profile.csv` or `gpu_profile.csv` file on your filesystem and visualize it with `benchmark/Plots.ipynb`.
   
   ### Benchmark on GPU
-  ![gpu](https://raw.githubusercontent.com/yurijvolkov/datafest_examples/master/benchmark/gpu_plot.png?token=AP5Wc5Djcl6paHioko3thdQjuCauOGhgks5cuvedwA%3D%3D)
+  ![gpu](https://github.com/yurijvolkov/datafest_examples/blob/master/benchmark/gpu_plot.png)
   
   ### Benchmark on CPU
-  ![cpu](https://raw.githubusercontent.com/yurijvolkov/datafest_examples/master/benchmark/cpu_plot.png?token=AP5Wc9_V7jkUUU73mR06A0FzJYLFR7cxks5cuvgGwA%3D%3D)
+  ![cpu](https://github.com/yurijvolkov/datafest_examples/blob/master/benchmark/cpu_plot.png)
   
 * **implementation_difference** : Shows differences of CudnnGRU from platform-independent RNN that tf provides.
 
