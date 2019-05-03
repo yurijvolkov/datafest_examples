@@ -51,6 +51,6 @@ with tf.Session() as sess:
                                         [out, final_state, kernel],
                                         feed_dict={x: np.ones([1, 5, 1]),
                                                    init_state: np.zeros([1, 2])})
-print(f'Final state Cudnn : {final_state_v}\n')
-print(f'Output Cudnn : {out_v}\n')
-print(f'Kernel Cudnn : {kernel_v}\n')
+print(f'Final state GRUCell : {final_state_v}\n')
+print(f'Output GRUCell : {out_v}\n')
+print(f'Kernel GRUCell : {kernel_v}\n')
